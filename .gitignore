@@ -1,0 +1,14 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+.vscode/
+*.pem
+*.key
+
+# Terraform lock file (optional)
+.terraform.lock.hcl
+
+# OS junk
+.DS_Store
+Thumbs.db
