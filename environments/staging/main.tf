@@ -11,7 +11,6 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-
 module "networking" {
   source               = "../../modules/networking"
   env                  = var.env
