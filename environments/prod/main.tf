@@ -11,7 +11,6 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# ─── Your Modules (Person A) ───
 
 module "networking" {
   source               = "../../modules/networking"
@@ -38,29 +37,3 @@ module "alb" {
   alb_sg_id         = module.security_groups.alb_sg_id
   public_subnet_ids = module.networking.public_subnet_ids
 }
-
-# ─── Partner's Modules (Person B) — uncomment when ready ───
-
-# module "launch_template" {
-#   source          = "../../modules/launch_template"
-#   env             = var.env
-#   group_name      = var.group_name
-#   ami_id          = data.aws_ami.amazon_linux.id
-#   instance_type   = var.instance_type
-#   key_name        = var.key_name
-#   web_sg_id       = module.security_groups.web_sg_id
-#   s3_image_bucket = var.s3_image_bucket
-#   s3_image_key    = var.s3_image_key
-#   team_members    = var.team_members
-# }
-
-# module "asg" {
-#   source             = "../../modules/asg"
-#   env                = var.env
-#   group_name         = var.group_name
-#   min_size           = var.min_size
-#   max_size           = var.max_size
-#   subnet_ids         = module.networking.private_subnet_ids
-#   target_group_arn   = module.alb.target_group_arn
-#   launch_template_id = module.launch_template.launch_template_id
-# }
