@@ -28,6 +28,11 @@ variable "max_size" {
   type        = number
 }
 
+variable "desired_capacity" {
+  description = "Desired number of instances in ASG"
+  type        = number
+}
+
 variable "key_name" {
   description = "SSH key pair name"
   type        = string
