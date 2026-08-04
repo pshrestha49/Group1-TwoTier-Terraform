@@ -13,7 +13,7 @@ resource "aws_launch_template" "web" {
   ]
 
   iam_instance_profile {
-    name = "LabRole"
+    name = "LabInstanceProfile"
   }
 
   user_data = base64encode(

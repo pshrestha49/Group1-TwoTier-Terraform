@@ -1,8 +1,8 @@
 #!/bin/bash
 
-dnf update -y
+yum update -y
 
-dnf install httpd -y
+yum install httpd -y
 
 systemctl enable httpd
 systemctl start httpd
@@ -20,7 +20,7 @@ cat <<EOF > index.html
 
 <h1>Aaron King</h1>
 
-<h2>ACS730 Final Project</h2>
+<h2>Pratham Shrestha</h2>
 
 <img src="cat.jpg" width="500">
 
