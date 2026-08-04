@@ -11,6 +11,7 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
+
 module "networking" {
   source               = "../../modules/networking"
   env                  = var.env
@@ -35,4 +36,27 @@ module "alb" {
   vpc_id            = module.networking.vpc_id
   alb_sg_id         = module.security_groups.alb_sg_id
   public_subnet_ids = module.networking.public_subnet_ids
+}
+
+module "launch_template" {
+  source = "../../modules/launch_template"
+
+  ami_id            = data.aws_ami.amazon_linux.id
+  instance_type     = var.instance_type
+  security_group_id = module.security_groups.web_sg_id
+  key_name          = var.key_name
+}
+
+module "asg" {
+  source = "../../modules/asg"
+
+  launch_template_id = module.launch_template.launch_template_id
+
+  private_subnets = module.networking.private_subnet_ids
+
+  target_group_arn = module.alb.target_group_arn
+
+  min_size         = var.min_size
+  max_size         = var.max_size
+  desired_capacity = var.desired_capacity
 }

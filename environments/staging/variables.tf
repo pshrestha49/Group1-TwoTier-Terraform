@@ -63,3 +63,8 @@ variable "team_members" {
   description = "List of team member names"
   type        = list(string)
 }
+
+variable "desired_capacity" {
+  description = "Desired number of instances in ASG"
+  type        = number
+}
