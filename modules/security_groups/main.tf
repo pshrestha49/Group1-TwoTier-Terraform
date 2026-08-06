@@ -1,4 +1,14 @@
 # ─── ALB Security Group (HTTP from internet) ───
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 resource "aws_security_group" "alb_sg" {
   name   = "${var.group_name}-${var.env}-ALB-SG"
   vpc_id = var.vpc_id
