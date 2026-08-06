@@ -1,13 +1,23 @@
-variable "launch_template_id" {}
+variable "launch_template_id" {
+  type = string
+}
 
 variable "private_subnets" {
   type = list(string)
 }
 
-variable "target_group_arn" {}
+variable "target_group_arn" {
+  type = string
+}
 
-variable "min_size" {}
+variable "min_size" {
+  type = number
+}
 
-variable "max_size" {}
+variable "max_size" {
+  type = number
+}
 
-variable "desired_capacity" {}
+variable "desired_capacity" {
+  type = number
+}
