@@ -1,3 +1,13 @@
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 # ─── Application Load Balancer (Public Subnets) ───
 resource "aws_lb" "app" {
   name               = "${var.group_name}-${var.env}-ALB"
