@@ -54,17 +54,4 @@ variable "private_subnet_cidrs" {
   type        = list(string)
 }
 
-variable "s3_image_bucket" {
-  description = "S3 bucket name for website images"
-  type        = string
-}
 
-variable "s3_image_key" {
-  description = "S3 object key for the website image"
-  type        = string
-}
-
-variable "team_members" {
-  description = "List of team member names"
-  type        = list(string)
-}
