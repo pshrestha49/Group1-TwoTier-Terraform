@@ -2,8 +2,47 @@
 
 Welcome to the **Group 1** Two-Tier AWS Infrastructure project! This repository contains the complete Terraform code to automate the provisioning of a highly available, secure, two-tier web application architecture on AWS.
 
-![Architecture Diagram](architecture.png)
-*(Note: Replace `architecture.png` with the actual exported diagram)*
+```mermaid
+flowchart TB
+    User((End User))
+    Admin((Administrator))
+    
+    subgraph AWS [AWS Cloud]
+        direction TB
+        S3[(Private S3 Bucket\nWebsite Images)]
+        
+        subgraph VPC [Two-Tier VPC]
+            direction TB
+            IGW[Internet Gateway]
+            
+            subgraph Public [Public Subnets]
+                ALB(Application Load Balancer)
+                NAT(NAT Gateway)
+                Bastion(Bastion Host)
+            end
+            
+            subgraph Private [Private Subnets]
+                subgraph ASG [Auto Scaling Group]
+                    Web1[Apache Web Server 1]
+                    Web2[Apache Web Server 2]
+                end
+            end
+        end
+    end
+
+    User -->|HTTP Traffic| IGW
+    Admin -->|SSH Traffic| IGW
+    
+    IGW --> ALB
+    IGW --> NAT
+    IGW --> Bastion
+    
+    ALB -->|Distributes Traffic| ASG
+    Bastion -->|Admin SSH| ASG
+    
+    ASG -->|Request Image via IAM| NAT
+    NAT -->|Fetch Image| S3
+```
 
 ## 📖 Project Overview
 
